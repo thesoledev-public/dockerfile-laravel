@@ -22,3 +22,11 @@ RUN apk update && apk add \
 RUN apk add libzip-dev
 
 RUN docker-php-ext-install pdo pdo_mysql zip bcmath
+
+RUN addgroup -g 1000 -S www && \
+    adduser -u 1000 -S www -G www
+
+USER www
+
+COPY --chown=www:www . /var/www/
+
